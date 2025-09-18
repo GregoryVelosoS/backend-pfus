@@ -1,13 +1,20 @@
-let usuarios = [];
+const db = require("../db/db.json");
 
-console.log(usuarios);
+let usuarios = db.usuarios;
+
 module.exports = {
   
+  // LOGIN
+  login: (usuario, senha) => {
+    return usuarios.find((u) => u.usuario === usuario && u.senha === senha) || null;
+  },
+
   // CREATE
-  salvar: ({ usuario, senha }) => {
+  salvar: ({ usuario,email, senha }) => {
     const novoUsuario = {
       id: usuarios.length + 1,
       usuario,
+      email,
       senha,
     };
     usuarios.push(novoUsuario);
@@ -41,8 +48,5 @@ module.exports = {
     return true;
   },
 
-  // LOGIN
-  login: (usuario, senha) => {
-    return usuarios.find((u) => u.usuario === usuario && u.senha === senha) || null;
-  },
+
 };

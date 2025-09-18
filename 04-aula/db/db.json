@@ -1,0 +1,26 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nome": "Gregory",
+      "email": "gregory@gmail.com",
+      "senha": "5"
+    },
+    {
+      "id": 2,
+      "nome": "Cristiano",
+      "email": "cristiano@gmail.com",
+      "senha": "7"
+    }
+  ],
+  "produtos": [
+    {
+      "id": 8933,
+      "nome": "Bolo no pote",
+      "descricao": "é um bolo, dentro de um pote",
+      "categoria": "Alimentos e Bebidas",
+      "preco": "15",
+      "imagemUrl": "https://guiadacozinha.com.br/wp-content/uploads/2019/10/bolo-no-pote-floresta-negra.jpg"
+    }
+  ]
+}

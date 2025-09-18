@@ -4,7 +4,7 @@ const userController = require("../controllers/userController");
 
 // Cadastro
 router.get("/cadastrar", userController.formCadastro);
-router.post("/salvar", userController.salvarUsuario);
+router.post("/cadastrar", userController.salvarUsuario);
 
 // Login
 router.get("/login", userController.formLogin);
