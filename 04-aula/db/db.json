@@ -2,14 +2,23 @@
   "usuarios": [
     {
       "id": 1,
-      "nome": "Gregory",
+      "usuario": "Gregory",
       "email": "gregory@gmail.com",
-      "senha": "5"
+      "tipo": "Administrador",
+      "senha": 5
     },
     {
       "id": 2,
-      "nome": "Cristiano",
+      "usuario": "Cristiano",
       "email": "cristiano@gmail.com",
+      "tipo": "Gerente",
+      "senha": 7
+    },
+    {
+      "id": 3,
+      "usuario": "Goku",
+      "email": "goku@gmail.com",
+      "tipo": "Funcionário",
       "senha": "7"
     }
   ],

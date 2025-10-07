@@ -13,7 +13,7 @@ router.post("/login", userController.loginUsuario);
 // CRUD
 router.get("/", userController.listarUsuarios);       // Read All
 router.get("/:id", userController.buscarUsuario);     // Read One
-router.put("/:id", userController.atualizarUsuario);  // Update
-router.delete("/:id", userController.deletarUsuario); // Delete
+router.post("/:id", userController.atualizarUsuario);  // Update
+router.get("/deletar/:id", userController.deletarUsuario); // Delete
 
 module.exports = router;

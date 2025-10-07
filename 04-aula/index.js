@@ -10,6 +10,8 @@ const path = require("path");
 // // Caminho para as páginas (views HTML)
 // const caminho = path.join(__dirname, "views");
 
+app.use(express.static('public'));
+
 // Definindo EJS como template engine
 app.set("view engine", "ejs");
 
@@ -24,7 +26,6 @@ app.use(
 );
 app.use(express.json());
 
-
 // Middleware global de autorização (simulado)
 app.use(checaAutorizacao);
 
@@ -33,19 +34,22 @@ app.use("/usuarios", userRoutes);
 
 // Outras rotas
 app.get("/home", (req, res) => {
-  res.render("index", { titulo: "Home", usuario: "Visitante" });
   // res.sendFile(`${caminho}/index.html`);
+  res.status(200);
+  res.render("index", { titulo: "Home", usuario: "Visitante" });
+});
+
+app.get("/", (req, res) => {
+  // res.send("Olá mundo, servidor rodando!")
+  res.status(200);
+  res.render("index", { titulo: "Inicio" });
 });
 
 // Página 404
 app.use((req, res) => {
   res.status(404);
-  res.render("404");
+  res.render("404", { titulo: "Página Erro" });
   // res.status(404).sendFile(`${caminho}/404.html`);
-});
-
-app.get("/", (req, res) => {
-  res.send("Olá mundo, servidor rodando!");
 });
 
 // Inicia servidor

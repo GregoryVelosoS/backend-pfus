@@ -1,45 +1,52 @@
 const path = require("path");
 const userModel = require("../models/userModel");
 
-const caminho = path.join(__dirname, "..", "views");
-
 module.exports = {
   // ---------- VIEWS ----------
   formCadastro: (req, res) => {
-    // res.sendFile(`${caminho}/cadastro.html`);
-    res.render("cadastro");
+    res.render("usuarios/cadastro", { titulo: "Cadastro" });
   },
 
   formLogin: (req, res) => {
-    // res.sendFile(`${caminho}/login.html`);
-    res.render("login");
+    res.render("login", { titulo: "Login" });
   },
 
   // ---------- LOGIN ----------
   loginUsuario: (req, res) => {
-    const { usuario, senha } = req.body;
-    const logado = userModel.login(usuario, senha);
+    const { email, senha } = req.body;
+    const logado = userModel.login(email, senha);
 
     if (!logado) {
-      return res.status(401).json({ mensagem: "Usuário ou senha inválidos" });
-      // return res.render("login", { mensagem: "Usuário ou senha inválidos" });
+      return res.render("login", {
+        titulo: "Login",
+        erro: "Email ou senha inválidos",
+      });
     }
-    res.json({ mensagem: "Login realizado com sucesso", usuario: logado });
-    // res.render("index", { titulo: "Bem-vindo ao sistema", usuario: logado.usuario });
+
+    res.render("index", {
+      titulo: "Bem-vindo ao sistema",
+      usuario: logado.usuario,
+    });
   },
 
   // ---------- CRUD ----------
   salvarUsuario: (req, res) => {
-    const { usuario,email, senha } = req.body;
-    userModel.salvar({ usuario,email, senha });
-    // res.sendFile(`${caminho}/cadastroConfirmado.html`);
-    res.render("cadastroConfirmado");
+    const { usuario, email, senha, tipo } = req.body;
+    const usuarioNovo = userModel.salvar({ usuario, email, senha, tipo });
+    res.render("usuarios/confirmacao", {
+      tipo: "cadastro",
+      titulo: "Cadastro Confirmado",
+      usuarioNovo,
+    });
   },
 
   listarUsuarios: (req, res) => {
     const usuarios = userModel.listarTodos();
-    res.json(usuarios);
-    res.render("usuarios", { usuarios });
+    // res.json(usuarios);
+    res.render("usuarios/listaUsuarios", {
+      titulo: "Lista de usuarios",
+      usuarios,
+    });
   },
 
   buscarUsuario: (req, res) => {
@@ -47,22 +54,32 @@ module.exports = {
     const usuario = userModel.buscarPorId(id);
 
     if (!usuario) {
-      return res.status(404).json({ mensagem: "Usuário não encontrado" });
+      return res.status(404).render("usuarios/erroUsuario", {
+        titulo: "Erro",
+        mensagem: "Usuário não encontrado",
+      });
     }
 
-    res.json(usuario);
+    res.render("usuarios/editar", { titulo: "Edição", usuario });
   },
 
   atualizarUsuario: (req, res) => {
     const id = req.params.id;
-    const { usuario, senha } = req.body;
-    const atualizado = userModel.atualizar(id, { usuario, senha });
+    const { usuario, email, senha, tipo } = req.body;
+    const atualizado = userModel.atualizar(id, { usuario, email, senha, tipo });
 
     if (!atualizado) {
-      return res.status(404).json({ mensagem: "Usuário não encontrado" });
+      return res.status(404).render("usuarios/erroUsuario", {
+        titulo: "Erro",
+        mensagem: "Usuário não encontrado",
+      });
     }
 
-    res.json({ mensagem: "Usuário atualizado com sucesso", atualizado });
+    res.render("usuarios/confirmacao", {
+      tipo: "edicao",
+      titulo: "Edição Confirmada",
+      atualizado,
+    });
   },
 
   deletarUsuario: (req, res) => {
@@ -70,9 +87,16 @@ module.exports = {
     const deletado = userModel.deletar(id);
 
     if (!deletado) {
-      return res.status(404).json({ mensagem: "Usuário não encontrado" });
+      return res.status(404).render("usuarios/erroUsuario", {
+        titulo: "Erro",
+        mensagem: "Usuário não encontrado",
+      });
     }
 
-    res.json({ mensagem: "Usuário deletado com sucesso" });
+    res.render("usuarios/confirmacao", {
+      tipo: "excluir",
+      titulo: "Usuário deletado",
+      deletado,
+    });
   },
 };

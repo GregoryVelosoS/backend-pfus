@@ -1,0 +1,36 @@
+<%- include('../partials/header')%>
+
+<main class="d-flex flex-column flex-fill text-center justify-content-center">
+  <div
+    class="bg-success w-50 mx-auto align-content-center"
+    style="height: 300px"
+  >
+    <% if (tipo == "cadastro") { %>
+    <h1 class="text-white">
+      Cadastro de <%- usuarioNovo.usuario %> confirmado
+    </h1>
+
+    <% } else if (tipo == "edicao") { %>
+      <h1 class="text-white">
+        Edição de <%- atualizado.usuario %> confirmado
+      </h1>
+    <% } else { %>
+      <h1 class="text-white">
+        Usuário <%- deletado.usuario %> foi deletado
+      </h1>
+    <% } %>
+
+    <a href="/usuarios">
+      <button class="btn btn-lg btn-secondary mx-2">
+        Voltar para lista de usuários
+      </button></a
+    >
+    <a href="/usuarios/cadastrar">
+      <button class="btn btn-lg btn-primary mx-2">
+        Voltar para cadastro de usuários
+      </button></a
+    >
+  </div>
+</main>
+
+<%- include('../partials/footer') %>

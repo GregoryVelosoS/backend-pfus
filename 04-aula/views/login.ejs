@@ -1,19 +1,66 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Login</title>
-</head>
-<body>
-  <h1>Login</h1>
-  <form action="/usuarios/login" method="POST">
-    <label for="usuario">Usuário:</label>
-    <input type="text" name="usuario" required>
-    <br><br>
-    <label for="senha">Senha:</label>
-    <input type="password" name="senha" required>
-    <br><br>
-    <button type="submit">Entrar</button>
-  </form>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= titulo %></title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+  </head>
+
+  <body class="d-flex flex-column min-vh-100 justify-content-center">
+    <header></header>
+    <main class="container w-50 text-center bg-light p-5">
+      <form action="/usuarios/login" method="POST">
+        <!-- Logo  -->
+        <i class="bi bi-shop d-block" style="font-size: 200px; color: black;"></i>
+        <!-- Caixinha de email  -->
+        <label for="inputEmail" class="form-label fs-2 mt-2"> Email </label>
+        <input
+          type="email"
+          class="form-control form-control-lg text-center"
+          id="inputEmail"
+          name="email"
+          placeholder="Digite o email"
+        />
+        <!-- Caixinha de senha  -->
+        <label for="inputSenha" class="form-label fs-2 mt-2"> Senha </label>
+        <input
+          type="password"
+          class="form-control form-control-lg text-center"
+          id="inputSenha"
+          name="senha"
+          placeholder="Digite a senha"
+        />
+        <button type="submit" class="btn btn-primary btn-lg mt-2">
+          Entrar
+        </button>
+      </form>
+
+      <% if (typeof erro !== "undefined") { %>
+      <div
+        class="alert alert-danger text-center mx-auto mt-3"
+        style="width: 500px"
+      >
+        <%= erro %>
+      </div>
+      <% } %>
+    </main>
+
+    <footer></footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
