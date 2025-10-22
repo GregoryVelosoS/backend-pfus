@@ -29,7 +29,71 @@
       "descricao": "é um bolo, dentro de um pote",
       "categoria": "Alimentos e Bebidas",
       "preco": "15",
+      "quantidade": "2",
       "imagemUrl": "https://guiadacozinha.com.br/wp-content/uploads/2019/10/bolo-no-pote-floresta-negra.jpg"
-    }
+    },
+      {
+    "id": 8936,
+    "nome": "Café Expresso",
+    "descricao": "Café forte e encorpado, perfeito para o dia.",
+    "categoria": "Alimentos e Bebidas",
+    "preco": "6",
+    "quantidade": "10",
+    "imagemUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAiGeCC3KhBPz8xa_dcPdPor2D__CuueBzeA&s"
+  },
+  {
+    "id": 8937,
+    "nome": "Brownie",
+    "descricao": "Brownie macio e delicioso com chocolate.",
+    "categoria": "Alimentos e Bebidas",
+    "preco": "9",
+    "quantidade": "7",
+    "imagemUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAiGeCC3KhBPz8xa_dcPdPor2D__CuueBzeA&s"
+  },
+  {
+    "id": 8938,
+    "nome": "Salada de Frutas",
+    "descricao": "Mix de frutas frescas e suculentas.",
+    "categoria": "Alimentos e Bebidas",
+    "preco": "10",
+    "quantidade": "4",
+    "imagemUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAiGeCC3KhBPz8xa_dcPdPor2D__CuueBzeA&s"
+  },
+  {
+    "id": 8939,
+    "nome": "Cookie",
+    "descricao": "Biscoito crocante com gotas de chocolate.",
+    "categoria": "Alimentos e Bebidas",
+    "preco": "5",
+    "quantidade": "15",
+    "imagemUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAiGeCC3KhBPz8xa_dcPdPor2D__CuueBzeA&s"
+  },
+  {
+    "id": 8940,
+    "nome": "Água Mineral",
+    "descricao": "Água mineral natural sem gás.",
+    "categoria": "Alimentos e Bebidas",
+    "preco": "3",
+    "quantidade": "20",
+    "imagemUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAiGeCC3KhBPz8xa_dcPdPor2D__CuueBzeA&s"
+  },
+  {
+    "id": 8941,
+    "nome": "Chá Gelado",
+    "descricao": "Chá natural gelado, perfeito para refrescar.",
+    "categoria": "Alimentos e Bebidas",
+    "preco": "7",
+    "quantidade": "6",
+    "imagemUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAiGeCC3KhBPz8xa_dcPdPor2D__CuueBzeA&s"
+  },
+  {
+    "id": 8942,
+    "nome": "Torta de Limão",
+    "descricao": "Torta doce com recheio cremoso de limão.",
+    "categoria": "Alimentos e Bebidas",
+    "preco": "14",
+    "quantidade": "3",
+    "imagemUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAiGeCC3KhBPz8xa_dcPdPor2D__CuueBzeA&s"
+  }
   ]
 }

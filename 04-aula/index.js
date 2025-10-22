@@ -5,6 +5,7 @@ const port = 5000;
 // Importa middlewares e rotas
 const checaAutorizacao = require("./middlewares/authMiddleware");
 const userRoutes = require("./routes/userRoutes");
+const produtosRoutes = require("./routes/produtosRoutes");
 
 const path = require("path");
 // // Caminho para as páginas (views HTML)
@@ -31,6 +32,9 @@ app.use(checaAutorizacao);
 
 // Rotas de usuários (CRUD + login)
 app.use("/usuarios", userRoutes);
+
+// Rotas de produtos (CRUD)
+app.use("/produtos", produtosRoutes);
 
 // Outras rotas
 app.get("/home", (req, res) => {

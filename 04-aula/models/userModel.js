@@ -28,7 +28,7 @@ module.exports = {
   buscarPorId: (id) => usuarios.find((u) => u.id == id) || null,
 
   // UPDATE
-  atualizar: (id, { usuario, senha }) => {
+  atualizar: (id, { usuario, senha, tipo }) => {
     const index = usuarios.findIndex((u) => u.id == id);
     if (index === -1) return null;
 
@@ -36,6 +36,7 @@ module.exports = {
       ...usuarios[index],
       usuario: usuario || usuarios[index].usuario,
       senha: senha || usuarios[index].senha,
+      tipo: tipo || usuarios[index].tipo,
     };
     return usuarios[index];
   },

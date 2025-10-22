@@ -7,27 +7,27 @@
   >
     <% if (tipo == "cadastro") { %>
     <h1 class="text-white">
-      Cadastro de <%- usuarioNovo.usuario %> confirmado
+      Cadastro de <%- produtoNovo.nome %> confirmado
     </h1>
 
     <% } else if (tipo == "edicao") { %>
       <h1 class="text-white">
-        Edição de <%- atualizado.usuario %> confirmado
+        Edição de <%- atualizado.nome %> confirmado
       </h1>
     <% } else { %>
       <h1 class="text-white">
-        Usuário <%- deletado.usuario %> foi deletado
+        Produto <%- deletado.nome %> foi deletado
       </h1>
     <% } %>
 
-    <a href="/usuarios">
+    <a href="/produtos">
       <button class="btn btn-lg btn-secondary mx-2">
-        Voltar para lista de usuários
+        Voltar para lista de produtos
       </button>
     </a>
-    <a href="/usuarios/cadastrar">
+    <a href="/produtos/cadastrar">
       <button class="btn btn-lg btn-primary mx-2">
-        Voltar para cadastro de usuários
+        Voltar para cadastro de produtos
       </button>
     </a>
   </div>

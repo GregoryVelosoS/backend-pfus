@@ -2,11 +2,12 @@
 
 <main class="container d-flex flex-column flex-fill justify-content-center">
   <h1 class="text-center mb-4">Edição de Usuário</h1>
-
   <form action="/usuarios/<%= usuario.id %>" method="POST">
     <div class="mb-3">
       <!-- Nome de usuário -->
-      <label for="inputUsuario" class="form-label fs-5 mt-2">Nome de usuário</label>
+      <label for="inputUsuario" class="form-label fs-5 mt-2">
+        Nome de usuário
+      </label>
       <input
         type="text"
         class="form-control form-control-lg"
@@ -49,7 +50,10 @@
         name="tipo"
         required
       >
-        <option value="Gerente" <%= usuario.tipo === "Gerente" ? "selected" : "" %>>Gerente</option>
+        <option value="Gerente" 
+          <%= usuario.tipo === "Gerente" ? "selected" : "" %>>
+            Gerente
+        </option>
         <option value="Funcionário" <%= usuario.tipo === "Funcionário" ? "selected" : "" %>>Funcionário</option>
         <option value="Administrador" <%= usuario.tipo === "Administrador" ? "selected" : "" %>>Administrador</option>
       </select>

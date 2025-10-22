@@ -1,0 +1,111 @@
+<%- include('../partials/header')%>
+
+<main class="container d-flex flex-column flex-fill justify-content-center">
+  <h1 class="text-center">Cadastro de produto</h1>
+  <form action="/produtos/cadastrar" method="POST">
+    <div class="mb-3">
+      <!-- Caixinha de nome de produto -->
+      <label for="inputNome" class="form-label fs-2 mt-2">
+        Nome de produto
+      </label>
+      <input
+        type="text"
+        class="form-control form-control-lg"
+        id="inputNome"
+        name="nome"
+        placeholder="Digite o nome de produto"
+        required
+      />
+
+      <!-- Caixinha de descrição de produto -->
+      <label for="inputDescricao" class="form-label fs-2 mt-2">
+        Descrição
+      </label>
+      <input
+        type="text"
+        class="form-control form-control-lg"
+        id="inputDescricao"
+        name="descricao"
+        placeholder="Digite a descrição de produto"
+        required
+      />
+
+      <div class="row">
+        <div class="col">
+          <!-- Caixinha de tipo de produto -->
+          <label class="form-label fs-2 mt-2"> Categoria de produto </label>
+          <select class="form-select form-select-lg" name="categoria">
+            <option value="Alimentos">Alimentos</option>
+            <option value="Bebidas">Bebidas</option>
+            <option value="Eletrônicos">Eletrônicos</option>
+          </select>
+          <!-- Caixinha de preço de produto -->
+          <label for="inputPreco" class="form-label fs-2 mt-2"> Preço </label>
+          <input
+            type="number"
+            step="0.1"
+            class="form-control form-control-lg"
+            id="inputPreco"
+            name="preco"
+            placeholder="Digite o preço de produto"
+            required
+          />
+
+          <!-- Caixinha de quantidade de produto -->
+          <label for="inputQuantidade" class="form-label fs-2 mt-2">
+            Quantidade
+          </label>
+          <input
+            type="number"
+            step="1"
+            class="form-control form-control-lg"
+            id="inputQuantidade"
+            name="quantidade"
+            placeholder="Digite a quantidade de produto"
+            required
+          />
+        </div>
+        <div class="col">
+          <!-- Caixinha de imagem de produto -->
+          <label for="inputImagem" class="form-label fs-2 mt-2">
+            Imagem de produto
+          </label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="inputImagem"
+            name="imagemUrl"
+            placeholder="Digite o link de imagem do produto"
+            required
+          />
+          <img
+            src="https://www.malhariapradense.com.br/wp-content/uploads/2017/08/produto-sem-imagem.png"
+            class="rounded mx-auto d-block mt-2"
+            id="previewImagem"
+            width="250px"
+            height="250px"
+          />
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg">Cadastrar</button>
+  </form>
+
+  <script>
+
+    const inputImagem = document.getElementById("inputImagem");
+    const previewImagem = document.getElementById("previewImagem");
+
+    const imagemPadrao = "https://www.malhariapradense.com.br/wp-content/uploads/2017/08/produto-sem-imagem.png"
+    
+    inputImagem.addEventListener("input", () => {
+      const url = inputImagem.value.trim();
+      previewImagem.src =
+        url || imagemPadrao
+;
+    });
+  </script>
+</main>
+
+<%- include('../partials/footer') %>
