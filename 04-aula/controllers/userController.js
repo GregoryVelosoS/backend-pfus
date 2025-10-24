@@ -3,11 +3,8 @@ const userModel = require("../models/userModel");
 
 module.exports = {
   // ---------- VIEWS ----------
-  formCadastro: (req, res) => {
-    res.render("usuarios/cadastro", { titulo: "Cadastro" });
-  },
-
   formLogin: (req, res) => {
+    req.session.destroy();
     res.render("login", { titulo: "Login" });
   },
 
@@ -23,13 +20,20 @@ module.exports = {
       });
     }
 
-    res.render("index", {
-      titulo: "Bem-vindo ao sistema",
-      usuario: logado.usuario,
-    });
+    // Salva os dados do usuário na sessão
+    req.session.logado = {
+      id: logado.id,
+      usuario: logado.usuario, // conforme o retorno do seu model
+      email: logado.email,
+    };
+    res.redirect("/home");
   },
 
   // ---------- CRUD ----------
+  formCadastro: (req, res) => {
+    res.render("usuarios/cadastro", { titulo: "Cadastro" });
+  },
+
   salvarUsuario: (req, res) => {
     const { usuario, email, senha, tipo } = req.body;
     const usuarioNovo = userModel.salvar({ usuario, email, senha, tipo });

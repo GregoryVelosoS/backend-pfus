@@ -78,12 +78,12 @@
       </ul>
       <!-- Nome de usuário e botão de sair -->
       <p class="text-muted mx-2 mb-lg-0" id="textoUsuarioAtual">
-        Usuário: Gregory
+        Usuário: <%= logado.usuario %>
       </p>
       <button
         class="btn btn-danger"
         type="button"
-        onclick="location.href='usuarios/login'"
+        onclick="location.href='/usuarios/login'"
       >
         <i class="bi bi-box-arrow-right"></i>
         Sair

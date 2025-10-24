@@ -1,9 +1,11 @@
 const express = require("express");
 const app = express();
+const session = require("express-session");
 const port = 5000;
 
 // Importa middlewares e rotas
 const checaAutorizacao = require("./middlewares/authMiddleware");
+const {usuarioMiddleware} = require("./middlewares/userSessionMiddleware");
 const userRoutes = require("./routes/userRoutes");
 const produtosRoutes = require("./routes/produtosRoutes");
 
@@ -29,6 +31,15 @@ app.use(express.json());
 
 // Middleware global de autorização (simulado)
 app.use(checaAutorizacao);
+
+// Middleware de sessão
+app.use(session({
+  secret: "chave-super-segura", // use algo mais forte em produção
+  resave: false,
+  saveUninitialized: false,
+}));
+
+app.use(usuarioMiddleware)
 
 // Rotas de usuários (CRUD + login)
 app.use("/usuarios", userRoutes);
