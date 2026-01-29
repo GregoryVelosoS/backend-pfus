@@ -11,22 +11,33 @@ module.exports = {
   // ---------- LOGIN ----------
   loginUsuario: (req, res) => {
     const { email, senha } = req.body;
-    const logado = userModel.login(email, senha);
 
-    if (!logado) {
-      return res.render("login", {
-        titulo: "Login",
-        erro: "Email ou senha inválidos",
-      });
-    }
+    userModel.login(email, senha, (erro, logado) => {
+      if (erro) {
+        console.error(erro);
+        return res.status(500).render("login", {
+          titulo: "Login",
+          erro: "Erro no servidor ao realizar login.",
+        });
+      }
 
-    // Salva os dados do usuário na sessão
-    req.session.logado = {
-      id: logado.id,
-      usuario: logado.usuario, // conforme o retorno do seu model
-      email: logado.email,
-    };
-    res.redirect("/home");
+      if (!logado) {
+        return res.render("login", {
+          titulo: "Login",
+          erro: "Email ou senha inválidos",
+        });
+      }
+
+      // Salva os dados do usuário na sessão
+      req.session.logado = {
+        id: logado.id,
+        usuario: logado.usuario,
+        email: logado.email,
+        tipo: logado.tipo,
+      };
+     
+      res.redirect("/home");
+    });
   },
 
   // ---------- CRUD ----------
@@ -36,71 +47,113 @@ module.exports = {
 
   salvarUsuario: (req, res) => {
     const { usuario, email, senha, tipo } = req.body;
-    const usuarioNovo = userModel.salvar({ usuario, email, senha, tipo });
-    res.render("usuarios/confirmacao", {
-      tipo: "cadastro",
-      titulo: "Cadastro Confirmado",
-      usuarioNovo,
+
+    userModel.salvar({ usuario, email, senha, tipo }, (erro, usuarioNovo) => {
+      if (erro) {
+        console.error(erro);
+        return res.status(500).render("usuarios/erroUsuario", {
+          titulo: "Erro",
+          mensagem: "Erro ao salvar usuário.",
+        });
+      }
+
+      res.render("usuarios/confirmacao", {
+        tipo: "cadastro",
+        titulo: "Cadastro Confirmado",
+        usuarioNovo,
+      });
     });
   },
 
   listarUsuarios: (req, res) => {
-    const usuarios = userModel.listarTodos();
-    // res.json(usuarios);
-    res.render("usuarios/listaUsuarios", {
-      titulo: "Lista de usuarios",
-      usuarios,
+    userModel.listarTodos((erro, usuarios) => {
+      if (erro) {
+        console.error(erro);
+        return res.status(500).render("usuarios/erroUsuario", {
+          titulo: "Erro",
+          mensagem: "Erro ao listar usuários.",
+        });
+      }
+
+      res.render("usuarios/listaUsuarios", {
+        titulo: "Lista de Usuários",
+        usuarios,
+      });
     });
   },
 
   buscarUsuario: (req, res) => {
     const id = req.params.id;
-    const usuario = userModel.buscarPorId(id);
 
-    if (!usuario) {
-      return res.status(404).render("usuarios/erroUsuario", {
-        titulo: "Erro",
-        mensagem: "Usuário não encontrado",
-      });
-    }
+    userModel.buscarPorId(id, (erro, usuario) => {
+      if (erro) {
+        console.error(erro);
+        return res.status(500).render("usuarios/erroUsuario", {
+          titulo: "Erro",
+          mensagem: "Erro ao buscar usuário.",
+        });
+      }
 
-    res.render("usuarios/editar", { titulo: "Edição", usuario });
+      if (!usuario) {
+        return res.status(404).render("usuarios/erroUsuario", {
+          titulo: "Erro",
+          mensagem: "Usuário não encontrado.",
+        });
+      }
+
+      res.render("usuarios/editar", { titulo: "Edição", usuario });
+    });
   },
 
   atualizarUsuario: (req, res) => {
     const id = req.params.id;
-    const { usuario, email, senha, tipo } = req.body;
-    const atualizado = userModel.atualizar(id, { usuario, email, senha, tipo });
+    const { usuario, senha, tipo } = req.body;
 
-    if (!atualizado) {
-      return res.status(404).render("usuarios/erroUsuario", {
-        titulo: "Erro",
-        mensagem: "Usuário não encontrado",
+    //aqui
+    userModel.atualizar(id, { usuario, senha, tipo }, (erro, atualizado) => {
+      if (erro) {
+        console.error(erro);
+        return res.status(500).render("usuarios/erroUsuario", {
+          titulo: "Erro",
+          mensagem: "Erro ao atualizar usuário.",
+        });
+      }
+
+      if (!atualizado) {
+        return res.status(404).render("usuarios/erroUsuario", {
+          titulo: "Erro",
+          mensagem: "Usuário não encontrado.",
+        });
+      }
+
+      res.render("usuarios/confirmacao", {
+        tipo: "edicao",
+        titulo: "Edição Confirmada",
+        //aqui
+        atualizado
+
       });
-    }
-
-    res.render("usuarios/confirmacao", {
-      tipo: "edicao",
-      titulo: "Edição Confirmada",
-      atualizado,
     });
   },
 
   deletarUsuario: (req, res) => {
     const id = req.params.id;
-    const deletado = userModel.deletar(id);
 
-    if (!deletado) {
-      return res.status(404).render("usuarios/erroUsuario", {
-        titulo: "Erro",
-        mensagem: "Usuário não encontrado",
+    userModel.deletar(id, (erro, sucesso) => {
+      if (erro) {
+        console.error(erro);
+        return res.status(500).render("usuarios/erroUsuario", {
+          titulo: "Erro",
+          mensagem: "Erro ao deletar usuário.",
+        });
+      }
+      const deletado = { usuario: "selecionado"}
+
+      res.render("usuarios/confirmacao", {
+        tipo: "excluir",
+        titulo: "Usuário Deletado",
+        deletado
       });
-    }
-
-    res.render("usuarios/confirmacao", {
-      tipo: "excluir",
-      titulo: "Usuário deletado",
-      deletado,
     });
   },
 };

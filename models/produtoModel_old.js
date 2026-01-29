@@ -1,9 +1,11 @@
-// Importa a conexão do banco de dados
-const conn = require("../config/conexao");
+const db = require("../db/db.json");
+
+let produtos = db.produtos;
 
 module.exports = {
+
   // CREATE
-  salvar: ({ nome, descricao, categoria, preco, quantidade, imagemUrl }) => {
+  salvar: ({ nome, descricao, categoria, preco, quantidade, imagemUrl}) => {
     const novoProduto = {
       id: produtos.length + 1,
       nome,
@@ -19,19 +21,12 @@ module.exports = {
   },
 
   // READ
-  listarTodos: (callback) => {
-    const sql = `SELECT * FROM usuarios`;
-    conn.query(sql, callback);
-    console.log(callback)
-  },
+  listarTodos: () => produtos,
 
   buscarPorId: (id) => produtos.find((u) => u.id == id) || null,
 
   // UPDATE
-  atualizar: (
-    id,
-    { nome, descricao, categoria, preco, quantidade, imagemUrl }
-  ) => {
+  atualizar: (id, { nome, descricao, categoria, preco, quantidade, imagemUrl }) => {
     const index = produtos.findIndex((u) => u.id == id);
     if (index === -1) return null;
 
